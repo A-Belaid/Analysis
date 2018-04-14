@@ -1,0 +1,27 @@
+<div class="container padding-lg">
+  <div class="row">
+    <div class="btn btn-block btn-outline-dark row" (click)="onCreatePlaylistBtn()">
+      <span>
+        <i _ngcontent-c1="" class="material-icons" style="position: relative;top: 6px;">add_box</i>
+        Add a playlist
+      </span>
+    </div>
+    <div *ngIf="isCreating" class="col-md-12">
+      <br/>
+      <form class="form-inline" (ngSubmit)="onSubmit()" #playlistForm="ngForm">
+        <input [(ngModel)]="currentName" class="form-control col-md-8" placeholder="Playlist Name" maxlength="30" [ngModelOptions]={standalone:true} required/>
+        <div class="col-md-1"></div>
+        <button class="btn btn-lg float-r btn-success col-md-2" (click)="onCreatePlaylist()" [disabled]="currentName.length<=0">Submit</button>
+      </form>
+    </div>
+  </div>
+  <br/>
+  <li *ngFor="let p of playlistService.getPlaylists();let i = index" [attr.data-index]="i"  class="row margin-vertical-lg">
+    <div class="col-md-11">
+      <app-playlist class="btn btn-block" [name]="p.name" routerLink="/playlists/{{p.name}}"></app-playlist>
+    </div>
+    <div class="btn col-md-1 padding-lg" style="padding: 20px 0 0 0">
+        <i (click)=onDeletePlaylist(p) class="material-icons float-r">delete</i>
+    </div>
+  </li>
+</div>
