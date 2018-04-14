@@ -40,22 +40,10 @@ app.get('/artists', function(req, res){
 
     // -------------- SPOTIFY -------------------
 
-	//TODO: make sure that we have an access_token for spotify (call the auth process)
-
 	var repSpotify = spotifyServices.getArtists(artistName);
     var resultsSpotify = repSpotify["results"] ? repSpotify["results"] : null;
 
-	/*
-    if(resultsSpotify != null){
-        for(var i = 0; i < resultsSpotify.length; i++){
-            if(resStr == ""){
-                resStr = resultsSpotify[i]["name"];
-            } else {
-                resStr += "," + resultsSpotify[i]["name"];
-            }
-        }
-    }
-    */
+
 	// ------------------------------------------
 
     // -------------- DEEZER -------------------

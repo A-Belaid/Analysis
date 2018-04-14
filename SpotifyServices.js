@@ -41,21 +41,6 @@ exports.getTracks = function(searchWord){
     return(JSON.parse(xhttp.responseText));
 }
 
-/*
-exports.getTracks = function(trackName){
-    var xhttp = new XMLHttpRequest();
-
-    trackName = trackName.replace(/\s+/g, '+');
-
-    xhttp.open("GET", `https://api.spotify.com/v1/search?q=${trackName}&type=track`, false);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("Authorization", "Bearer " + getAccessToken());
-    xhttp.send(null);
-
-    return(JSON.parse(xhttp.responseText));
-}
-*/
-
 //Méthodes tirées de https://github.com/spotify/web-api-auth-examples/blob/master/authorization_code/app.js
 var generateRandomString = function(length) {
   var text = '';
@@ -122,29 +107,6 @@ exports.callback = function(req, res) {
 
         res.end();
     });
-
-        /*var options = {
-          url: 'https://api.spotify.com/v1/me',
-          headers: { 'Authorization': 'Bearer ' + access_token },
-          json: true
-        };
-
-        request.get(options, function(error, response, body) {
-          console.log(body);
-        });
-
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
-      } else {
-        res.redirect('/#' +
-          querystring.stringify({
-            error: 'invalid_token'
-          }));
-      }
-    });*/
 }
 
 //Générer un nouveau access_token à partir d'un refresh_token existant
