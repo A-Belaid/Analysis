@@ -1,14 +1,12 @@
-/* Load the HTTP library */
 var http = require("http");
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-var client_id = 't35HXu0Ah7mshpCLkst5qHvxeXprp1SpS14jsnN8C3tOrhyb5J'; // Deezer Mashape's key
+var client_id = 't35HXu0Ah7mshpCLkst5qHvxeXprp1SpS14jsnN8C3tOrhyb5J';
 
 exports.getArtists = function(artistName){
 
     var xhttp = new XMLHttpRequest();
 
-    //replace all spaces in the artist's name by a '+' sign
     artistName = artistName.replace(/\s+/g, '+');
 
     xhttp.open("GET", `https://deezerdevs-deezer.p.mashape.com/search?q=${artistName}`, false);
@@ -23,7 +21,6 @@ exports.getTracks = function(trackName){
 
     var xhttp = new XMLHttpRequest();
 
-    //replace all spaces in the artist's name by a '+' sign
     trackName = trackName.replace(/\s+/g, '+');
 
     xhttp.open("GET", `https://deezerdevs-deezer.p.mashape.com/search?q=${trackName}`, false);

@@ -1,0 +1,10 @@
+.navbar-brand>span {
+    color: white;
+    background: grey;
+    padding: 8px;
+    border-radius: 15px;
+}
+
+a {
+    float: left;
+}

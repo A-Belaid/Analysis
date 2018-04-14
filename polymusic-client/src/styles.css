@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,body{
+    height: 100%;
+}
+
+body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c6c6c6+0,b3b3b3+100&0+0,1+100 */
+    background: -moz-linear-gradient(top, rgba(198,198,198,0) 0%, rgba(179,179,179,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(198,198,198,0) 0%,rgba(179,179,179,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(198,198,198,0) 0%,rgba(179,179,179,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c6c6c6', endColorstr='#b3b3b3',GradientType=0 ); /* IE6-9 */
+    background-attachment: fixed;
+}
+
+.small-border-bottom {
+    border-bottom: solid 1px;
+}
+.small-border-top {
+    border-top: solid 1px;
+}
+
+.small-margin-top {
+    margin-top: 10px;
+}
+
+.seperator {
+    min-height: 90vh;
+    border-right: solid 10px #434b5467;
+}
+
+.gray-border {
+border-color: gray
+}
+
+.padding-lg {
+    padding: 15px;
+}
+
+.margin-lg {
+    margin: 15px;
+}
+.margin-vertical-lg {
+    margin: 15px 0px;
+}
+
+.float-l {
+    float: left;
+}
+
+.float-r {
+    float: right;
+}
+
+.song {
+    border-radius: 30px;
+    border-left: #343a40 solid 5px;
+    border-right: #343a40 solid 5px;
+    border-bottom: #343a40 solid 2px;
+    border-top: #343a40 solid 2px;
+    -o-transition:.15s;
+    -ms-transition:.15s;
+    -moz-transition:.15s;
+    -webkit-transition:.15s;
+    /* ...and now for the proper property */
+    transition:.15s;
+    margin: 5px 0px;
+}
+.song:hover,.song:active {
+    background-color: #343a40;
+    color: white;
+    vertical-align: middle;
+}
