@@ -8,7 +8,7 @@ export class PlaylistService {
 
     private playlists: Set<Playlist> = new Set<Playlist>();
 
-    constructor(private restApiService: RestApiProxyService) { 
+    constructor(private restApiService: RestApiProxyService) {
         restApiService.getPlaylists().then((res) => {
             res.forEach(playlist => {
                 let p = new Playlist(playlist.name, playlist.songs);
@@ -31,7 +31,6 @@ export class PlaylistService {
     }
 
     getPlaylist(name: string) {
-        // Todo: send the message _after_ fetching the heroes
         let res: Playlist;
         this.playlists.forEach((p) => {
             console.log(p.name, name);

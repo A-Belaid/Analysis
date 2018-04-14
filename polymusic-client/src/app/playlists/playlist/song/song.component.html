@@ -1,5 +1,5 @@
 <div class="row song padding-lg">
-  <div class="col-md-10" (click)="selectSong();">
+  <div class="col-md-9" (click)="selectSong();">
     <div class="col-md-6">
       <b>
         {{song.name}}
@@ -11,10 +11,19 @@
       </i>
     </div>
   </div>
-    <div class="col-md-2">
+  <div class="col-md-1">
       <button class="btn btn-light" [disabled]="playlistsService.playlistsCount()<=0" (click)="isAdding=!isAdding;song.isSelected=false;">
         <i class="material-icons">playlist_add</i>
       </button>
+  </div>
+  <div class="col-md-2" *ngIf="song.api=='Spotify'">
+    <img height="50px" src="/assets/spotifylogo.png">
+  </div>
+  <div class="col-md-2" *ngIf="song.api=='Jamendo'">
+    <img height="50px" src="/assets/jamendologo.png">
+  </div>
+  <div class="col-md-2" *ngIf="song.api=='Deezer'">
+    <img height="40px" src="/assets/deezerlogo.png">
   </div>
 
   <div *ngIf="isAdding" class="col-md-12 padding-lg small-border-top small-margin-top">
