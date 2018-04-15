@@ -1,6 +1,7 @@
+/* Load the HTTP library */
 var http = require("http");
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var client_id = '6b966403';
+var client_id = '6b966403'; // Your client id
 
 exports.getArtists = function(artistName){
 	var xhttp = new XMLHttpRequest();

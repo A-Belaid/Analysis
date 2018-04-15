@@ -1,17 +1,11 @@
 var express = require("express");
-var bodyParser = require('body-parser');
 var readline = require('readline');
 var cookieParser = require('cookie-parser');
 var jamendoServices = require('./JamendoServices.js');
 var spotifyServices = require('./SpotifyServices');
 var deezerServices = require('./DeezerServices');
-var playlistServices = require('./PlaylistServices');
-var cors = require('cors');
 
 var app = express();
-app.use(cors());
-app.use(bodyParser.json());
-
 app.listen(8888);
 
 app.use(express.static(__dirname + '/../public'))
@@ -40,14 +34,27 @@ app.get('/artists', function(req, res){
 
     // -------------- SPOTIFY -------------------
 
+	//TODO: make sure that we have an access_token for spotify (call the auth process)
+
 	var repSpotify = spotifyServices.getArtists(artistName);
     var resultsSpotify = repSpotify["results"] ? repSpotify["results"] : null;
 
-
+	/*
+    if(resultsSpotify != null){
+        for(var i = 0; i < resultsSpotify.length; i++){
+            if(resStr == ""){
+                resStr = resultsSpotify[i]["name"];
+            } else {
+                resStr += "," + resultsSpotify[i]["name"];
+            }
+        }
+    }
+    */
 	// ------------------------------------------
 
     // -------------- DEEZER -------------------
     var repDeezer = deezerServices.getArtists(artistName)["data"];
+    console.log(repDeezer);
     if(repDeezer != null){
 		for(var i = 0; i < repDeezer.length; i++){
 			var artistName = repDeezer[i]["artist"]["name"];
@@ -58,8 +65,8 @@ app.get('/artists', function(req, res){
 					resStr += "," + repDeezer[i]["artist"]["name"];
 				}
 			}
-
-		}
+			
+		}	
 	}
     // ------------------------------------------
 
@@ -117,7 +124,6 @@ app.get('/tracks', (req, res) => {
 		track.artist = results[i]["artist_name"];
 		track.album = results[i]["album_name"];
 		track.link = results[i]["audio"];
-		track.api = "Jamendo";
 
 		tracks.push(track);
 	}
@@ -125,24 +131,9 @@ app.get('/tracks', (req, res) => {
 
 	// ------------------------ SPOTIFY -------------------------
 
-	var repSpotifyResponse = spotifyServices.getTracks(trackName);
+	var repSpotify = spotifyServices.getTracks(trackName);
 
-	if(repSpotifyResponse != null){
-        var repSpotifyTracks = repSpotifyResponse["tracks"]["items"];
-
-        // TRACKS
-		for(var i = 0; i < repSpotifyTracks.length; i++){
-			if(repSpotifyTracks[i]["preview_url"] != null) {
-                var track = {};
-                track.name = repSpotifyTracks[i]["name"];
-                track.artist = repSpotifyTracks[i]["artists"][0]["name"];
-                track.link = repSpotifyTracks[i]["preview_url"];
-                track.api = "Spotify";
-
-                tracks.push(track);
-            }
-		}
-	}
+	var resultsSpotify = rep["results"] ? rep["results"] : [];
 
 	// ----------------------------------------------------------
 
@@ -153,10 +144,9 @@ app.get('/tracks', (req, res) => {
     	for(var i = 0; i < repDeezer.length; i++) {
 			var track = {};
 			track.name = repDeezer[i]["title"];
-			track.artist = repDeezer[i]["artist"]["name"];
+			track.artist = repDeezer[i]["artist"]["artist_name"];
 			track.album = repDeezer[i]["album"]["title"];
 			track.link = repDeezer[i]["preview"];
-			track.api = "Deezer";
 
 			tracks.push(track);
 		}
@@ -184,24 +174,3 @@ app.get('/callback', (req, res) => {
 app.get('/refresh_token', (req, res) => {
 	spotifyServices.refeshToken(req, res);
 });
-
-//Gestion des playlists
-//Retourner toutes les playlists:
-app.get('/playlists', (req, res) => {
-  playlistServices.getPlaylists(req, res);
-})
-
-//Creer une playlist
-app.post('/playlists', (req, res) => {
-  playlistServices.addPlaylist(req, res);
-})
-
-//Supprimer une playlist
-app.delete('/playlists', (req, res) => {
-  playlistServices.removePlaylist(req, res);
-})
-
-//Modifier une playlist
-app.put('/playlists', (req, res) => {
-  playlistServices.modifyPlaylist(req, res);
-})
